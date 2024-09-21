@@ -10,6 +10,7 @@
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
+#[derive(Debug, PartialEq)]
 pub struct PasswordGenerator {
     pub pool: PasswordGeneratorPool,
     pub method: PasswordGeneratorMethod,
@@ -17,6 +18,7 @@ pub struct PasswordGenerator {
     pub length: u8,
 }
 
+#[derive(Debug, PartialEq)]
 pub enum PasswordGeneratorMethod  {
     SHA2512,
     SHA3512,
@@ -24,6 +26,7 @@ pub enum PasswordGeneratorMethod  {
     Whirlpool
 }
 
+#[derive(Debug, PartialEq)]
 pub enum PasswordGeneratorPool {
     a_Z(String),
     a_Z0_9(String),
@@ -40,3 +43,20 @@ impl PasswordGenerator {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::password_generator::{PasswordGenerator, PasswordGeneratorPool, PasswordGeneratorMethod};
+
+    #[test]
+    fn pwgen_new_test() {
+        let pwgen_new: PasswordGenerator = PasswordGenerator::new();
+        assert_eq!(pwgen_new, PasswordGenerator {
+            pool: PasswordGeneratorPool::a_Z("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".to_string()),
+            method: PasswordGeneratorMethod::SHA2512,
+            disable_str: "".to_string(),
+            length: 8,
+        })
+    }
+}
+

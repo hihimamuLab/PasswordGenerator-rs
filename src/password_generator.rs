@@ -6,7 +6,7 @@
 /* By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+    */
 /*                                                                                     +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+     */
 /* Created: 2024/09/21 22:39:06 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#      */
-/* Updated: 2024/09/22 14:44:23 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
+/* Updated: 2024/09/22 21:44:09 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
@@ -64,13 +64,13 @@ impl PasswordGenerator<'_> {
             length: 8,
         }
     }
-    pub fn pool(self, pool: PasswordGeneratorPool) -> Self {
-        Self {
-            pool,
-            method: self.method,
-            disable_str: self.disable_str,
-            length: self.length,
-        }
+    pub fn pool(mut self, pool: PasswordGeneratorPool) -> Self {
+        self.pool = pool;
+        self
+    }
+    pub fn method(mut self, method: PasswordGeneratorMethod) -> Self {
+        self.method = method;
+        self
     }
 }
 
@@ -104,6 +104,20 @@ mod tests {
                 method: PasswordGeneratorMethod::BLAKE3,
                 disable_str: "",
                 length: 8,
+            }
+        )
+    }
+    #[test]
+    fn pwgen_method_test() {
+        let pwgen_method: PasswordGenerator = 
+            PasswordGenerator::new().method(PasswordGeneratorMethod::SHA2512);
+        assert_eq!(
+            pwgen_method,
+            PasswordGenerator {
+                pool: PasswordGeneratorPool::UPPERCASE | PasswordGeneratorPool::LOWERCASE,
+                method: PasswordGeneratorMethod::SHA2512,
+                disable_str: "",
+                length: 8
             }
         )
     }

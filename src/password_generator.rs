@@ -6,7 +6,7 @@
 /* By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+    */
 /*                                                                                     +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+     */
 /* Created: 2024/09/21 22:39:06 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#      */
-/* Updated: 2024/09/22 22:00:15 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
+/* Updated: 2024/09/22 23:31:10 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
@@ -76,6 +76,10 @@ impl PasswordGenerator {
         self.disable_str = disable_str;
         self
     }
+    pub fn length(mut self, length: u8) -> Self {
+        self.length = length;
+        self
+    }
 }
 
 #[cfg(test)]
@@ -136,6 +140,20 @@ mod tests {
                 method: PasswordGeneratorMethod::BLAKE3,
                 disable_str: "abc".to_string(),
                 length: 8
+            }
+        )
+    }
+    #[test]
+    fn pwgen_length_test() {
+        let pwgen_length: PasswordGenerator = 
+            PasswordGenerator::new().length(16);
+        assert_eq!(
+            pwgen_length,
+            PasswordGenerator {
+                pool: PasswordGeneratorPool::UPPERCASE | PasswordGeneratorPool::LOWERCASE,
+                method: PasswordGeneratorMethod::BLAKE3,
+                disable_str: "".to_string(),
+                length: 16,
             }
         )
     }

@@ -1,0 +1,65 @@
+name: Rust CI
+
+on: push
+
+jobs:
+  typos:
+    name: Fix typo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load actions/checkout
+        uses: actions/checkout@v4
+      - name: Install typos-cli
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: typos-cli
+      - name: Execute typos-cli
+        run: typos --write-changes
+  clippy:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load actions/checkout
+        uses: actions/checkout@v4
+      - name: Load actions-rs/toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Execute clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+  fmt:
+    name: Format rust
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load actions/checkout
+        uses: actions/checkout@v4
+      - name: Load actions-rs/toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Execute rustfmt
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+  test:
+    name: Cargo test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load actions/checkout
+        uses: actions/checkout@v4
+      - name: Load actions-rs/toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: false
+      - name: Execute cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test

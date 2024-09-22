@@ -6,17 +6,17 @@
 /* By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+    */
 /*                                                                                     +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+     */
 /* Created: 2024/09/21 22:39:06 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#      */
-/* Updated: 2024/09/22 21:44:09 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
+/* Updated: 2024/09/22 22:00:15 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
 use std::ops::BitOr;
 
 #[derive(Debug, PartialEq)]
-pub struct PasswordGenerator<'a> {
+pub struct PasswordGenerator {
     pub pool: PasswordGeneratorPool,
     pub method: PasswordGeneratorMethod,
-    pub disable_str: &'a str,
+    pub disable_str: String,
     pub length: u8,
 }
 
@@ -55,21 +55,25 @@ impl Default for PasswordGeneratorPool {
     }
 }
 
-impl PasswordGenerator<'_> {
+impl PasswordGenerator {
     pub fn new() -> Self {
         Self {
             pool: Default::default(),
             method: Default::default(),
-            disable_str: "",
+            disable_str: "".to_string(),
             length: 8,
         }
     }
-    pub fn pool(mut self, pool: PasswordGeneratorPool) -> Self {
+    pub fn pool(mut self, pool: PasswordGeneratorPool) -> Self{
         self.pool = pool;
         self
     }
     pub fn method(mut self, method: PasswordGeneratorMethod) -> Self {
         self.method = method;
+        self
+    }
+    pub fn disable_str(mut self, disable_str: String) -> Self {
+        self.disable_str = disable_str;
         self
     }
 }
@@ -87,8 +91,8 @@ mod tests {
             pwgen_new,
             PasswordGenerator {
                 pool: PasswordGeneratorPool::UPPERCASE | PasswordGeneratorPool::LOWERCASE,
-                method: PasswordGeneratorMethod::BLAKE3,
-                disable_str: "",
+                 method: PasswordGeneratorMethod::BLAKE3,
+                disable_str: "".to_string(),
                 length: 8,
             }
         );
@@ -102,7 +106,7 @@ mod tests {
             PasswordGenerator {
                 pool: PasswordGeneratorPool::UPPERCASE,
                 method: PasswordGeneratorMethod::BLAKE3,
-                disable_str: "",
+                disable_str: "".to_string(),
                 length: 8,
             }
         )
@@ -116,7 +120,7 @@ mod tests {
             PasswordGenerator {
                 pool: PasswordGeneratorPool::UPPERCASE | PasswordGeneratorPool::LOWERCASE,
                 method: PasswordGeneratorMethod::SHA2512,
-                disable_str: "",
+                disable_str: "".to_string(),
                 length: 8
             }
         )

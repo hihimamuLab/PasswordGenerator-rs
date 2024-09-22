@@ -125,4 +125,18 @@ mod tests {
             }
         )
     }
+    #[test]
+    fn pwgen_disable_str_test() {
+        let pwgen_disable_str: PasswordGenerator =
+            PasswordGenerator::new().disable_str("abc".to_string());
+        assert_eq!(
+            pwgen_disable_str,
+            PasswordGenerator {
+                pool: PasswordGeneratorPool::UPPERCASE | PasswordGeneratorPool::LOWERCASE,
+                method: PasswordGeneratorMethod::BLAKE3,
+                disable_str: "abc".to_string(),
+                length: 8
+            }
+        )
+    }
 }

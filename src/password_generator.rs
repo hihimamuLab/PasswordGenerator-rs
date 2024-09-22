@@ -6,7 +6,7 @@
 /* By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+    */
 /*                                                                                     +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+     */
 /* Created: 2024/09/21 22:39:06 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#      */
-/* Updated: 2024/09/22 22:00:15 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
+/* Updated: 2024/09/22 23:27:57 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
@@ -74,6 +74,10 @@ impl PasswordGenerator {
     }
     pub fn disable_str(mut self, disable_str: String) -> Self {
         self.disable_str = disable_str;
+        self
+    }
+    pub fn length(mut self, length: u8) -> Self {
+        self.length = length;
         self
     }
 }

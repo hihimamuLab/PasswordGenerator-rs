@@ -11,23 +11,16 @@
 /* ************************************************************************************************************************************************ */
 
 mod pool;
+mod method;
 use pool::Pool;
+use method::Method;
 
 #[derive(Debug, PartialEq)]
 pub struct PasswordGenerator {
-    pub pool: pool::Pool,
-    pub method: PasswordGeneratorMethod,
+    pub pool: Pool,
+    pub method: Method,
     pub disable_str: String,
     pub length: u8,
-}
-
-#[derive(Debug, PartialEq, Default)]
-pub enum PasswordGeneratorMethod {
-    SHA2512,
-    SHA3512,
-    #[default]
-    BLAKE3,
-    Whirlpool,
 }
 
 impl PasswordGenerator {
@@ -43,7 +36,7 @@ impl PasswordGenerator {
         self.pool = pool;
         self
     }
-    pub fn method(mut self, method: PasswordGeneratorMethod) -> Self {
+    pub fn method(mut self, method: Method) -> Self {
         self.method = method;
         self
     }
@@ -60,7 +53,7 @@ impl PasswordGenerator {
 #[cfg(test)]
 mod tests {
     use crate::password_generator::pool::Pool;
-    use crate::password_generator::{PasswordGenerator, PasswordGeneratorMethod};
+    use crate::password_generator::{PasswordGenerator, Method};
 
     #[test]
     fn pwgen_new_test() {
@@ -69,7 +62,7 @@ mod tests {
             pwgen_new,
             PasswordGenerator {
                 pool: Pool::UPPERCASE | Pool::LOWERCASE,
-                method: PasswordGeneratorMethod::BLAKE3,
+                method: Method::BLAKE3,
                 disable_str: "".to_string(),
                 length: 8,
             }
@@ -82,7 +75,7 @@ mod tests {
             pwgen_pool,
             PasswordGenerator {
                 pool: Pool::UPPERCASE,
-                method: PasswordGeneratorMethod::BLAKE3,
+                method: Method::BLAKE3,
                 disable_str: "".to_string(),
                 length: 8,
             }
@@ -91,12 +84,12 @@ mod tests {
     #[test]
     fn pwgen_method_test() {
         let pwgen_method: PasswordGenerator =
-            PasswordGenerator::new().method(PasswordGeneratorMethod::SHA2512);
+            PasswordGenerator::new().method(Method::SHA2512);
         assert_eq!(
             pwgen_method,
             PasswordGenerator {
                 pool: Pool::UPPERCASE | Pool::LOWERCASE,
-                method: PasswordGeneratorMethod::SHA2512,
+                method: Method::SHA2512,
                 disable_str: "".to_string(),
                 length: 8
             }
@@ -110,7 +103,7 @@ mod tests {
             pwgen_disable_str,
             PasswordGenerator {
                 pool: Pool::UPPERCASE | Pool::LOWERCASE,
-                method: PasswordGeneratorMethod::BLAKE3,
+                method: Method::BLAKE3,
                 disable_str: "abc".to_string(),
                 length: 8
             }
@@ -123,7 +116,7 @@ mod tests {
             pwgen_length,
             PasswordGenerator {
                 pool: Pool::UPPERCASE | Pool::LOWERCASE,
-                method: PasswordGeneratorMethod::BLAKE3,
+                method: Method::BLAKE3,
                 disable_str: "".to_string(),
                 length: 16,
             }

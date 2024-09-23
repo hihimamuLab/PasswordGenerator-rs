@@ -6,15 +6,15 @@
 /* By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+    */
 /*                                                                                     +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+     */
 /* Created: 2024/09/23 10:34:21 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#      */
-/* Updated: 2024/09/23 10:36:36 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
+/* Updated: 2024/09/23 13:53:52 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
-use std::{ops::BitOr, process::Output};
+use std::{ops::BitOr, ops::BitAnd,  process::Output};
 
 #[derive(Debug, PartialEq)]
 pub struct Pool {
-    value: u8,
+    pub value: u8,
 }
 
 impl Pool {
@@ -28,6 +28,15 @@ impl BitOr for Pool {
     fn bitor(self, rhs: Self) -> Self::Output {
         Self {
             value: self.value | rhs.value,
+        }
+    }
+}
+
+impl BitAnd for Pool {
+    type Output = Self;
+    fn bitand(self, rhs: Self) -> Self::Output {
+        Self {
+            value:  self.value & rhs.value
         }
     }
 }

@@ -12,6 +12,7 @@
 
 use std::{ops::BitOr, process::Output};
 
+#[derive(Debug, PartialEq)]
 pub struct Pool {
     value: u8
 }

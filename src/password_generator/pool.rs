@@ -14,20 +14,20 @@ use std::{ops::BitOr, process::Output};
 
 #[derive(Debug, PartialEq)]
 pub struct Pool {
-    value: u8
+    value: u8,
 }
 
 impl Pool {
-    pub const UPPERCASE: Self = Pool { value: 1  };
-    pub const LOWERCASE: Self = Pool { value: 2  };
-    pub const SYMBOL: Self = Pool { value: 4  };
+    pub const UPPERCASE: Self = Pool { value: 1 };
+    pub const LOWERCASE: Self = Pool { value: 2 };
+    pub const SYMBOL: Self = Pool { value: 4 };
 }
 
 impl BitOr for Pool {
     type Output = Self;
     fn bitor(self, rhs: Self) -> Self::Output {
         Self {
-            value: self.value | rhs.value
+            value: self.value | rhs.value,
         }
     }
 }
@@ -37,4 +37,3 @@ impl Default for Pool {
         Self::UPPERCASE | Self::LOWERCASE
     }
 }
-

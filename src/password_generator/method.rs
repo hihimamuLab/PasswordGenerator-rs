@@ -16,5 +16,5 @@ pub enum Method {
     SHA3512,
     #[default]
     BLAKE3,
-    Whirlpool
+    Whirlpool,
 }

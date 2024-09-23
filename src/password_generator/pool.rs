@@ -10,7 +10,7 @@
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
-use std::{ops::BitOr, ops::BitAnd,  process::Output};
+use std::{ops::BitAnd, ops::BitOr};
 
 #[derive(Debug, PartialEq)]
 pub struct Pool {
@@ -36,7 +36,7 @@ impl BitAnd for Pool {
     type Output = Self;
     fn bitand(self, rhs: Self) -> Self::Output {
         Self {
-            value:  self.value & rhs.value
+            value: self.value & rhs.value,
         }
     }
 }

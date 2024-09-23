@@ -14,7 +14,7 @@ use std::{ops::BitOr, ops::BitAnd,  process::Output};
 
 #[derive(Debug, PartialEq)]
 pub struct Pool {
-    value: u8,
+    pub value: u8,
 }
 
 impl Pool {

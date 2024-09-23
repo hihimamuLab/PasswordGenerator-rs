@@ -6,7 +6,7 @@
 /* By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+    */
 /*                                                                                     +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+     */
 /* Created: 2024/09/21 22:39:06 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#      */
-/* Updated: 2024/09/23 10:54:59 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
+/* Updated: 2024/09/23 14:02:18 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
@@ -119,6 +119,16 @@ mod tests {
                 method: Method::BLAKE3,
                 disable_str: "".to_string(),
                 length: 16,
+            }
+        )
+    }
+    #[test]
+    fn pwgen_pool_bitand_test() {
+        let pool_bitand: Pool = Pool { value: 1 } & Pool { value:3 };
+        assert_eq!(
+            pool_bitand,
+            Pool {
+                value: 1
             }
         )
     }

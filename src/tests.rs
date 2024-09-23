@@ -12,9 +12,7 @@
 
 #[cfg(test)]
 mod tests {
-    use crate::password_generator::{
-        method::{self, Method}, pool::Pool, PasswordGenerator
-    };
+    use crate::password_generator::{method::Method, pool::Pool, PasswordGenerator};
 
     #[test]
     fn pwgen_new_test() {
@@ -31,8 +29,7 @@ mod tests {
     }
     #[test]
     fn pwgen_pool_test() {
-        let pwgen_pool: PasswordGenerator = PasswordGenerator::new()
-            .pool(Pool::UPPERCASE);
+        let pwgen_pool: PasswordGenerator = PasswordGenerator::new().pool(Pool::UPPERCASE);
         assert_eq!(
             pwgen_pool,
             PasswordGenerator {
@@ -45,8 +42,7 @@ mod tests {
     }
     #[test]
     fn pwgen_method_test() {
-        let pwgen_method: PasswordGenerator = PasswordGenerator::new()
-            .method(Method::SHA2512);
+        let pwgen_method: PasswordGenerator = PasswordGenerator::new().method(Method::SHA2512);
         assert_eq!(
             pwgen_method,
             PasswordGenerator {
@@ -59,8 +55,8 @@ mod tests {
     }
     #[test]
     fn pwgen_disable_str_test() {
-        let pwgen_disable_str: PasswordGenerator = PasswordGenerator::new()
-            .disable_str("abc".to_string());
+        let pwgen_disable_str: PasswordGenerator =
+            PasswordGenerator::new().disable_str("abc".to_string());
         assert_eq!(
             pwgen_disable_str,
             PasswordGenerator {
@@ -73,8 +69,7 @@ mod tests {
     }
     #[test]
     fn pwgen_length_test() {
-        let pwgen_length: PasswordGenerator = PasswordGenerator::new()
-            .length(16);
+        let pwgen_length: PasswordGenerator = PasswordGenerator::new().length(16);
         assert_eq!(
             pwgen_length,
             PasswordGenerator {
@@ -84,5 +79,5 @@ mod tests {
                 length: 16
             }
         )
-    } 
+    }
 }

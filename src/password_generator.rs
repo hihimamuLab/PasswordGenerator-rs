@@ -10,10 +10,10 @@
 /*                                                                                                                                                  */
 /* ************************************************************************************************************************************************ */
 
-pub mod pool;
 pub mod method;
-use pool::Pool;
+pub mod pool;
 use method::Method;
+use pool::Pool;
 
 #[derive(Debug, PartialEq)]
 pub struct PasswordGenerator {
@@ -49,4 +49,3 @@ impl PasswordGenerator {
         self
     }
 }
-

@@ -30,3 +30,10 @@ impl BitOr for Pool {
         }
     }
 }
+
+impl Default for Pool {
+    fn default() -> Self {
+        Self::UPPERCASE | Self::LOWERCASE
+    }
+}
+

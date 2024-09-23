@@ -13,6 +13,7 @@
 #[cfg(test)]
 mod tests {
     use crate::password_generator::{method::Method, pool::Pool, PasswordGenerator};
+    use crate::hash::Hash;
 
     #[test]
     fn pwgen_new_test() {
@@ -79,5 +80,11 @@ mod tests {
                 length: 16
             }
         )
+    }
+
+    #[test]
+    fn sha2512_test() {
+        let sha2512: u32 = Hash::sha2512("hihimamu".to_string());
+        assert_eq!(sha2512, 2726927521);
     }
 }

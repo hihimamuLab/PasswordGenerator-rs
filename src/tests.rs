@@ -12,8 +12,7 @@
 
 #[cfg(test)]
 mod tests {
-    use crate::password_generator::{method::Method, pool::Pool, PasswordGenerator};
-    use crate::hash::Hash;
+    use crate::password_generator::{method::Method, pool::Pool, hash::Hash, PasswordGenerator};
 
     #[test]
     fn pwgen_new_test() {

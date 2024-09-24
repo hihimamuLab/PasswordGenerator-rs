@@ -12,6 +12,8 @@
 
 pub mod method;
 pub mod pool;
+pub mod hash;
+
 use method::Method;
 use pool::Pool;
 

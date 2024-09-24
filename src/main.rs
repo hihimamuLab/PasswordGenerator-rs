@@ -12,6 +12,5 @@
 
 mod password_generator;
 mod tests;
-mod hash;
 
 fn main() {}

@@ -43,7 +43,7 @@ jobs:
       - name: Execute clippy
         uses: actions-rs/cargo@v1
         with:
-          command: clippy --fix
+          command: clippy
   fmt:
     name: Format rust
     runs-on: ubuntu-latest

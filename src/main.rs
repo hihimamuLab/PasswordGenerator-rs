@@ -11,6 +11,13 @@
 /* ************************************************************************************************************************************************ */
 
 mod password_generator;
-mod tests;
+use password_generator::{PasswordGenerator, pool::Pool};
 
-fn main() {}
+
+fn main() {
+    let pwgen: PasswordGenerator = PasswordGenerator::new()
+        .pool(Pool::UPPERCASE | Pool::LOWERCASE | Pool::NUMBER | Pool::SYMBOL)
+        .length(8);
+    let password: String = pwgen.finalize();
+    println!("{}", password);
+}

@@ -1,53 +1,47 @@
-/* ************************************************************************************************************************************************ */
-/*                                                                                                                                                  */
-/*                                                                                           :::   :::        :::          :::   :::     :::    ::: */
-/* password_generator.rs                                                                   :+:+: :+:+:      :+: :+:      :+:+: :+:+:    :+:    :+:  */
-/*                                                                                       +:+ +:+:+ +:+    +:+   +:+    +:+ +:+:+ +:+   +:+    +:+   */
-/* By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+    */
-/*                                                                                     +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+     */
-/* Created: 2024/09/21 22:39:06 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#      */
-/* Updated: 2024/09/23 17:29:24 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.       */
-/*                                                                                                                                                  */
-/* ************************************************************************************************************************************************ */
-
-pub mod method;
 pub mod pool;
-pub mod hash;
 
-use method::Method;
 use pool::Pool;
+use rdrand::RdRand;
 
-#[derive(Debug, PartialEq)]
 pub struct PasswordGenerator {
-    pub pool: Pool,
-    pub method: Method,
-    pub disable_str: String,
-    pub length: u8,
+    pool: Pool,
+    length: u8
+}
+
+impl Default for PasswordGenerator {
+    fn default() -> Self {
+        Self {
+            pool: Pool::default(),
+            length: 8
+        }
+    }
 }
 
 impl PasswordGenerator {
     pub fn new() -> Self {
-        Self {
-            pool: Default::default(),
-            method: Default::default(),
-            disable_str: "".to_string(),
-            length: 8,
-        }
+        Self::default()
     }
     pub fn pool(mut self, pool: Pool) -> Self {
         self.pool = pool;
         self
     }
-    pub fn method(mut self, method: Method) -> Self {
-        self.method = method;
-        self
-    }
-    pub fn disable_str(mut self, disable_str: String) -> Self {
-        self.disable_str = disable_str;
-        self
-    }
     pub fn length(mut self, length: u8) -> Self {
         self.length = length;
         self
+    }
+    pub fn finalize(self) -> String {
+        let mut res: String = String::new();
+        let str_pool: String = Pool::to_string(self.pool);
+        loop {
+            let rand: u32 = RdRand::new()
+                .unwrap()
+                .try_next_u32()
+                .unwrap();
+            res.push(str_pool.chars().nth(usize::try_from(rand).unwrap() % str_pool.len()).unwrap());
+            if self.length == u8::try_from(res.len()).unwrap() {
+                break;
+            }
+        }
+        res
     }
 }

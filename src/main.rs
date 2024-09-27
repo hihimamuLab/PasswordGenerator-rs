@@ -14,9 +14,9 @@ mod password_generator;
 use password_generator::{pool::Pool, PasswordGenerator};
 
 fn main() {
-    let pasword_genrator: PasswordGenerator = PasswordGenerator::new()
+    let password_generator: PasswordGenerator = PasswordGenerator::new()
         .pool(Pool::UPPERCASE | Pool::LOWERCASE | Pool::NUMBER | Pool::SYMBOL)
         .length(8);
-    let password: String = pasword_genrator.finalize();
+    let password: String = password_generator.finalize();
     println!("{}", password);
 }

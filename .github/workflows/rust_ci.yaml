@@ -6,7 +6,7 @@
 #  By: hihimamu <hihimamu@gmail.com>                                                    +#+  +:+  +#+   +#++:++#++:   +#+  +:+  +#+   +#+    +:+     #
 #                                                                                      +#+       +#+   +#+     +#+   +#+       +#+   +#+    +#+      #
 #  Created: 2024/09/23 11:29:38 by hihimamu                                           #+#       #+#   #+#     #+#   #+#       #+#   #+#    #+#       #
-#  Updated: 2024/09/23 11:29:39 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.        #
+#  Updated: 2024/09/27 21:14:33 by hihimamu                                          ###       ###   ###     ###   ###       ###    ########.        #
 #                                                                                                                                                    #
 # ************************************************************************************************************************************************** #
 
@@ -59,7 +59,7 @@ jobs:
       - name: Execute rustfmt
         uses: actions-rs/cargo@v1
         with:
-          command: fmt --fix
+          command: fmt
   test:
     name: Cargo test
     runs-on: ubuntu-latest

@@ -11,8 +11,7 @@
 /* ************************************************************************************************************************************************ */
 
 mod password_generator;
-use password_generator::{PasswordGenerator, pool::Pool};
-
+use password_generator::{pool::Pool, PasswordGenerator};
 
 fn main() {
     let pwgen: PasswordGenerator = PasswordGenerator::new()

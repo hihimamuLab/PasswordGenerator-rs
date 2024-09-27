@@ -59,7 +59,7 @@ jobs:
       - name: Execute rustfmt
         uses: actions-rs/cargo@v1
         with:
-          command: fmt
+          command: fmt --fix
   test:
     name: Cargo test
     runs-on: ubuntu-latest

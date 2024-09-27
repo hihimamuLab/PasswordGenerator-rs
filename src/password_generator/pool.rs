@@ -1,4 +1,4 @@
-use std::ops::{BitOr, BitAnd};
+use std::ops::{BitAnd, BitOr};
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Pool(u8);
@@ -13,7 +13,7 @@ impl Pool {
 impl BitOr for Pool {
     type Output = Self;
     fn bitor(self, rhs: Self) -> Self::Output {
-        Self(self.0 | rhs.0)    
+        Self(self.0 | rhs.0)
     }
 }
 
@@ -27,7 +27,7 @@ impl BitAnd for Pool {
 impl Default for Pool {
     fn default() -> Self {
         Self(3)
-//     =Self(Pool::UPPERCASE.0 | Pool::LOWERCASE.0)
+        //     =Self(Pool::UPPERCASE.0 | Pool::LOWERCASE.0)
     }
 }
 
@@ -35,7 +35,7 @@ impl Pool {
     pub(in crate::password_generator) fn to_string(pool: Pool) -> String {
         let mut res: String = String::new();
         if pool & Pool::UPPERCASE == Pool::UPPERCASE {
-            res.push_str("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); 
+            res.push_str("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         }
         if pool & Pool::LOWERCASE == Pool::LOWERCASE {
             res.push_str("abcdefghijklmnopqrstuvwxyz");

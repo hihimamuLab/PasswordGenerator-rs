@@ -11,16 +11,17 @@
 /* ************************************************************************************************************************************************ */
 
 mod password_generator;
+
 use password_generator::{pool::Pool, PasswordGenerator};
 
 fn main() {
     for _ in 0..1{
         let password_generator: PasswordGenerator = PasswordGenerator::new()
-            .pool(Pool::UPPERCASE)
+            .pool(Pool::UPPERCASE | Pool::LOWERCASE | Pool::NUMBER | Pool::SYMBOL)
             .no_similar()
-        .length(27);
-        println!("{:#?}", password_generator);
+        .length(12);
         let password: String = password_generator.finalize();
         println!("{}", password);
+        PasswordGenerator::store(&password).unwrap();
     }
 }

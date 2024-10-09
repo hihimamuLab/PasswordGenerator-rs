@@ -11,10 +11,14 @@
 /* ************************************************************************************************************************************************ */
 
 pub mod pool;
+mod store;
 
 use pool::Pool;
 use rdrand::RdRand;
 use rand::{rngs::StdRng, RngCore, SeedableRng};
+use anyhow::{Ok, Result};
+use store::store;
+use std::io;
 
 #[derive(Debug)]
 pub struct PasswordGenerator {
@@ -70,5 +74,19 @@ impl PasswordGenerator {
             }
         }
         res
+    }
+    pub fn store(pw: &str) -> Result<()> {
+        println!("Do you store this password?(y/n)");
+        let mut buffer = String::new();
+        io::stdin().read_line(&mut buffer).unwrap();
+        if buffer.trim() == "y" {
+            store(pw)?; 
+            println!("Stored password");
+        } else if buffer.trim() == "n" {
+            println!("Didn't sotre password");
+        } else {
+            println!("Invalid input");
+        }
+        Ok(())
     }
 }
